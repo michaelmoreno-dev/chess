@@ -18,11 +18,11 @@ const pieces = {
   },
   queen: {
     dna: '<p>&#9819</p>',
-    worth: 3,
+    worth: 9,
   },
   king: {
     dna: '<p>&#9818</p>',
-    worth: 3,
+    worth: 1000,
   },
 }
 
@@ -38,7 +38,7 @@ for (let r = 8; r >= 1; r--) {
 }
 
 for (let i = 1; i <=8; i++) {
-  $(pieces.pawn.dna).addClass('white pawn').appendTo(`.file-${i}.rank-2`)
+  $(pieces.pawn.dna).addClass('white pawn').attr('draggable','true').appendTo(`.file-${i}.rank-2`)
 }
 $(pieces.rook.dna).addClass('white').appendTo(`.file-1.rank-1`)
 $(pieces.knight.dna).addClass('white').appendTo(`.file-2.rank-1`)
