@@ -1,0 +1,35 @@
+.container {
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container #board {
+  display: inline-block;
+}
+.container #board .div {
+  display: flex;
+}
+.container #board .div .square {
+  height: 85px;
+  width: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container #board .div .square p {
+  font-size: 75px;
+  margin: 0 auto;
+  padding: 0;
+  cursor: grab;
+}
+.container #board .div .square .white {
+  color: white;
+  -webkit-text-stroke: 1px black;
+}
+.container #board .div .square .black {
+  color: black;
+  -webkit-text-stroke: 1px white;
+}
+
+/*# sourceMappingURL=style.css.map */

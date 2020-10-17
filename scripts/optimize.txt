@@ -1,0 +1,1 @@
+Make piece generation happen during board generation, brack notation fr for piece

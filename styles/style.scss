@@ -1,0 +1,37 @@
+.container {
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #board {
+    display: inline-block;
+  
+    .div {
+      display: flex;
+  
+      .square {
+        height: 85px;
+        width: 85px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        p {
+          font-size: 75px;
+          margin: 0 auto;
+          padding: 0;
+          cursor: grab;
+        }
+        .white {
+          color: white;
+          -webkit-text-stroke: 1px black;
+        }
+        .black {
+          color: black;
+          -webkit-text-stroke: 1px white;
+        }
+      }
+    }
+  }
+}
