@@ -16,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 0;
 }
 .container #board .div .square p {
   font-size: 75px;
@@ -30,6 +31,30 @@
 .container #board .div .square .black {
   color: black;
   -webkit-text-stroke: 1px white;
+}
+.container #board .div .white-square {
+  background-color: white;
+}
+.container #board .div .black-square {
+  background-color: black;
+}
+.container #board .div .available {
+  transition: background-color 0.3s ease-in-out;
+  background-color: blue;
+}
+.container #board .div .enemy {
+  transition: background-color 0.3s ease-in-out;
+  background-color: red;
+}
+.container .capture {
+  height: 680px;
+  width: 67px;
+}
+.container .capture p {
+  font-size: 75px;
+  margin: 0 auto;
+  padding: 0;
+  cursor: grab;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -32,7 +32,7 @@ for (let r = 8; r >= 1; r--) {
   $('<div>').addClass(`div divider-${r}`).appendTo('#board')
   color++;
   for (let f = 1; f <= 8; f++) {
-    $('<div>').addClass(`square file-${f} rank-${r}`).appendTo(`.divider-${r}`).css({'background-color':`${color % 2 === 0 ? 'white':'black'}`});
+    $('<div>').addClass(`square file-${f} rank-${r}`).appendTo(`.divider-${r}`).addClass(color % 2 === 0 ? 'white-square':'black-square');
     color++;
   }
 }
@@ -49,6 +49,9 @@ $(pieces.bishop.dna).addClass('white').appendTo(`.file-6.rank-1`)
 $(pieces.knight.dna).addClass('white').appendTo(`.file-7.rank-1`)
 $(pieces.rook.dna).addClass('white').appendTo(`.file-8.rank-1`)
 
+for (let i = 1; i <= 8; i++) {
+  $(pieces.pawn.dna).addClass('black pawn').attr('draggable', 'true').appendTo(`.file-${i}.rank-7`)
+}
 $(pieces.rook.dna).addClass('black').appendTo(`.file-1.rank-8`)
 $(pieces.knight.dna).addClass('black').appendTo(`.file-2.rank-8`)
 $(pieces.bishop.dna).addClass('black').appendTo(`.file-3.rank-8`)

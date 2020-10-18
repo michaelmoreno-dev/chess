@@ -16,6 +16,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 0;
         
         p {
           font-size: 75px;
@@ -32,6 +33,31 @@
           -webkit-text-stroke: 1px white;
         }
       }
+      .white-square {
+        background-color: white;
+      }
+      .black-square {
+        background-color: black;
+      }
+      .available {
+        transition: background-color 0.3s ease-in-out;
+        background-color: blue;
+      }
+      .enemy {
+        transition: background-color 0.3s ease-in-out;
+        background-color: red;
+      }
+    }
+  }
+  .capture {
+    height: 680px;
+    width: 67px;
+
+    p {
+      font-size: 75px;
+      margin: 0 auto;
+      padding: 0;
+      cursor: grab;
     }
   }
 }
