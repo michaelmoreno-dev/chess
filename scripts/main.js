@@ -63,7 +63,7 @@ function select() {
             target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
           }
         }
-        $(`.square`).removeClass('available')
+        $(`.square`).removeClass('available').removeClass('enemy');
         select();
       })
     }, 1)

@@ -23,6 +23,7 @@
   margin: 0 auto;
   padding: 0;
   cursor: grab;
+  user-select: none;
 }
 .container #board .div .square .white {
   color: white;
@@ -55,6 +56,14 @@
   margin: 0 auto;
   padding: 0;
   cursor: grab;
+}
+.container .capture .white {
+  color: white;
+  -webkit-text-stroke: 1px black;
+}
+.container .capture .black {
+  color: black;
+  -webkit-text-stroke: 1px white;
 }
 
 /*# sourceMappingURL=style.css.map */

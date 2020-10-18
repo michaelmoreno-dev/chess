@@ -23,6 +23,7 @@
           margin: 0 auto;
           padding: 0;
           cursor: grab;
+          user-select: none;
         }
         .white {
           color: white;
@@ -58,6 +59,14 @@
       margin: 0 auto;
       padding: 0;
       cursor: grab;
+    }
+    .white {
+      color: white;
+      -webkit-text-stroke: 1px black;
+    }
+    .black {
+      color: black;
+      -webkit-text-stroke: 1px white;
     }
   }
 }
