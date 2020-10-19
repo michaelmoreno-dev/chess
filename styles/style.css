@@ -4,9 +4,6 @@
   justify-content: center;
   align-items: center;
 }
-.container #board {
-  display: inline-block;
-}
 .container #board .div {
   display: flex;
 }
@@ -64,6 +61,11 @@
 .container .capture .black {
   color: black;
   -webkit-text-stroke: 1px white;
+}
+
+.flip {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /*# sourceMappingURL=style.css.map */

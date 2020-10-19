@@ -17,8 +17,9 @@
 //   })
 // })
 
-function inCheck() {
-  let $king = $('.white.king');
+let check = false;
+function inCheck(color) {
+  let $king = $(`.${color}.king`);
   let $kingFile = parseInt($king.parent().attr('class').split(' ')[1].split('-')[1]);
   let $kingRank = parseInt($king.parent().attr('class').split(' ')[2].split('-')[1]);
   let $kingColor = $king.attr('class').split(' ')[0];
@@ -26,21 +27,22 @@ function inCheck() {
   function searchChecks(enemy, limit, horizontal, vertical) {
     for (let i = 1, h = horizontal, v = vertical; i <= limit; i++, h += horizontal, v += vertical) {
       let $query = $(`.file-${$kingFile + h}.rank-${$kingRank + v}`);
-      console.log(`.file-${$kingFile + h}.rank-${$kingRank + v}`);
       // IF QUERY IS OFF THE BOARD
       if ($query.length < 1) {
         break;
       }
       if ($query.children().length > 0) {
         if ($query.children().eq(0).attr('class').split(' ')[0] !== $kingColor && $query.children().eq(0).attr('class').split(' ')[1] === enemy) {
-          $query.addClass('enemy');
-          alert(`check from ${enemy}`);
+          $king.parent().addClass('enemy');
+          check = true;
+          // alert(`check from ${enemy}`);
         }
         break;
       }
     }
   }
   searchChecks('pawn',1,1,1)
+  searchChecks('pawn',1,-1,1)
   searchChecks('bishop',8,1,1)
   searchChecks('bishop',8,1,-1)
   searchChecks('bishop',8,-1,-1)
@@ -59,7 +61,7 @@ function inCheck() {
   searchChecks('knight',1,-1,2);
 }
 
-inCheck();
+let turn = true;
 
 function select() {
   $('.square p').on('click', function(){
@@ -70,7 +72,7 @@ function select() {
       $selection: $this,
       $color: $this.attr('class').split(' ')[0],
       $piece: $this.attr('class').split(' ')[1],
-      $position: $this.parent().attr('class').split(' ')[1] + '.' + $this.parent().attr('class').split(' ')[2],
+      $position: '.' + $this.parent().attr('class').split(' ')[1] + '.' + $this.parent().attr('class').split(' ')[2],
       $file: parseInt($this.parent().attr('class').split(' ')[1].split('-')[1]),
       $rank: parseInt($this.parent().attr('class').split(' ')[2].split('-')[1]),
     }
@@ -80,37 +82,57 @@ function select() {
     // console.log(current.$file);
     // console.log(current.$rank);
 
-    let validMoves = [];
-
-    checkMoves(current,validMoves);
-    setTimeout(function(){
-      $('.square').on('click', function(){
-        // console.log('Second click');
-        $('.square').off('click');
-        let $this = $(this);
-        let target = {
-          $selection: $this.children().eq(0),
-          $position: $this.attr('class').split(' ')[1] + '.' + $this.attr('class').split(' ')[2],
-          $file: parseInt($this.attr('class').split(' ')[1].split('-')[1]),
-          $rank: parseInt($this.attr('class').split(' ')[2].split('-')[1]),
-        }
-
-    
-        for (let i = 0; i < validMoves.length; i++) {
-          if (`${target.$file},${target.$rank}` == validMoves[i]) {
-            console.log('success');
-            current.$selection.appendTo($(`.${target.$position}`));
-            console.log(current.$color);
-            if (current.color == 'white') {
-              alert('white');
-            }
-            target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
+    if ((turn === true || current.$color === 'white') || (turn === false || current.$color === 'black')) {
+      
+      let validMoves = [];
+  
+      checkMoves(current,validMoves);
+      setTimeout(function(){
+        $('.square').on('click', function(){
+          // console.log('Second click');
+          $('.square').off('click');
+          let $this = $(this);
+          let target = {
+            $selection: $this.children().eq(0),
+            $position: '.' + $this.attr('class').split(' ')[1] + '.' + $this.attr('class').split(' ')[2],
+            $file: parseInt($this.attr('class').split(' ')[1].split('-')[1]),
+            $rank: parseInt($this.attr('class').split(' ')[2].split('-')[1]),
           }
-        }
-        $(`.square`).removeClass('available').removeClass('enemy');
-        select();
-      })
-    }, 1)
+  
+      
+          for (let i = 0; i < validMoves.length; i++) {
+            if (`${target.$file},${target.$rank}` == validMoves[i]) {
+              let tmp = current.$position
+              current.$selection.appendTo($(`${target.$position}`));
+              target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
+              inCheck('white');
+              inCheck('black');
+              // turn = !turn;
+              if (check === true) {
+                console.log('true');
+                console.log(tmp);
+                current.$selection.appendTo($(tmp))
+                console.log('That would put you in check!');
+                check = false;
+              }
+              break;
+            }
+          }
+          // RESET SQUARE STYLINGS
+          $(`.square`).removeClass('available').removeClass('enemy');
+          select();
+        })
+      }, 1)
+    }
+
   })
 }
 select();
+
+function flipBoard() {
+  $('#flip-board').on('click',function(){
+    $('#board').toggleClass('flip')
+    // $('.container').toggleClass('flip')
+  })
+}
+flipBoard();
