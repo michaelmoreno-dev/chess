@@ -2,14 +2,15 @@
 function movement(current, validMoves, limit, horizontal, vertical, modifier) {
   for (let i = 1, h = horizontal, v = vertical; i <= limit; i++, h+=horizontal, v+=vertical) {
     let $query = $(`.file-${current.$file + h}.rank-${current.$rank + v}`);
-
+    // IF QUERY IS OFF THE BOARD
     if ($query.length < 1) {
       break;
     }
+    // IF PIECE IS A PAWN
     if (modifier === 'pawn') {
       let q = 1;
       for (let n = 0; n <= 1; n++) {
-        let $cornerQuery = $(`.file-${current.$file + q}.rank-${current.$rank + v}`);
+        let $cornerQuery = $(`.file-${current.$file + q}.rank-${current.$rank + vertical}`);
         q *= -1
         if ($query.children().length < 1) {
           $query.addClass('available')
@@ -42,6 +43,7 @@ function movement(current, validMoves, limit, horizontal, vertical, modifier) {
 
 function checkMoves(current, validMoves) {
   if (current.$piece === 'pawn') {
+    //need to fix black pawn enemy target
     movement(current, validMoves, current.$rank === 2 || current.$rank === 7 ? 2:1, 0, current.$color === 'white' ? 1:-1, 'pawn');
   }
   if (current.$piece === 'rook') {
