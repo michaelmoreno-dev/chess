@@ -34,6 +34,10 @@
           color: black;
           -webkit-text-stroke: 1px white;
         }
+        .white-1 {
+          color: cyan;
+          -webkit-text-stroke: 1px black;
+        }
       }
       .white-square {
         background-color: white;
@@ -48,6 +52,9 @@
       .enemy {
         transition: background-color 0.3s ease-in-out;
         background-color: red;
+      }
+      .black-square-1 {
+        background-color: #ccc;
       }
     }
   }
@@ -70,9 +77,8 @@
       -webkit-text-stroke: 1px white;
     }
   }
-}
-
-.flip {
-  display: flex;
-  flex-direction: column-reverse;
+  .flip {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }

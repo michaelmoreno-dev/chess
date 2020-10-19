@@ -134,5 +134,8 @@ function flipBoard() {
     $('#board').toggleClass('flip')
     // $('.container').toggleClass('flip')
   })
+  $('#cycle-themes').on('click', function(){
+    $('.black-square').toggleClass('black-square-1')
+  })
 }
 flipBoard();

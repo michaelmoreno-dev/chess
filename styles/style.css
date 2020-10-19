@@ -30,6 +30,10 @@
   color: black;
   -webkit-text-stroke: 1px white;
 }
+.container #board .div .square .white-1 {
+  color: cyan;
+  -webkit-text-stroke: 1px black;
+}
 .container #board .div .white-square {
   background-color: white;
 }
@@ -43,6 +47,9 @@
 .container #board .div .enemy {
   transition: background-color 0.3s ease-in-out;
   background-color: red;
+}
+.container #board .div .black-square-1 {
+  background-color: #ccc;
 }
 .container .capture {
   height: 680px;
@@ -62,8 +69,7 @@
   color: black;
   -webkit-text-stroke: 1px white;
 }
-
-.flip {
+.container .flip {
   display: flex;
   flex-direction: column-reverse;
 }
