@@ -76,16 +76,16 @@ function select() {
       $file: parseInt($this.parent().attr('class').split(' ')[1].split('-')[1]),
       $rank: parseInt($this.parent().attr('class').split(' ')[2].split('-')[1]),
     }
-    // console.log(current.$color);
-    // console.log(current.$piece);
-    // console.log(current.$position);
-    // console.log(current.$file);
-    // console.log(current.$rank);
+    console.log(current.$color);
+    console.log(current.$piece);
+    console.log(current.$position);
+    console.log(current.$file);
+    console.log(current.$rank);
 
-    if ((turn === true || current.$color === 'white') || (turn === false || current.$color === 'black')) {
+    if ((turn === true && current.$color === 'white') || (turn === false && current.$color === 'black')) {
       
       let validMoves = [];
-  
+      
       checkMoves(current,validMoves);
       setTimeout(function(){
         $('.square').on('click', function(){
@@ -107,6 +107,7 @@ function select() {
               target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
               inCheck('white');
               inCheck('black');
+              turn = !turn;
               // turn = !turn;
               if (check === true) {
                 console.log('true');
@@ -124,7 +125,9 @@ function select() {
         })
       }, 1)
     }
-
+    else {
+      select();
+    }
   })
 }
 select();
