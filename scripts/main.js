@@ -33,9 +33,9 @@ function inCheck(color) {
       }
       if ($query.children().length > 0) {
         if ($query.children().eq(0).attr('class').split(' ')[0] !== $kingColor && $query.children().eq(0).attr('class').split(' ')[1] === enemy) {
-          $king.parent().addClass('enemy');
+          $king.parent().addClass('check');
           check = true;
-          // alert(`check from ${enemy}`);
+          console.log('check')
         }
         break;
       }
@@ -64,6 +64,7 @@ function inCheck(color) {
 let turn = true;
 
 function select() {
+  console.log(turn);
   $('.square p').on('click', function(){
     // console.log('First click');
     $('.square p').off('click');
@@ -76,12 +77,13 @@ function select() {
       $file: parseInt($this.parent().attr('class').split(' ')[1].split('-')[1]),
       $rank: parseInt($this.parent().attr('class').split(' ')[2].split('-')[1]),
     }
-    console.log(current.$color);
-    console.log(current.$piece);
-    console.log(current.$position);
-    console.log(current.$file);
-    console.log(current.$rank);
+    // console.log(current.$color);
+    // console.log(current.$piece);
+    // console.log(current.$position);
+    // console.log(current.$file);
+    // console.log(current.$rank);
 
+    // CHECK IF IT'S PLAYERS TURN
     if ((turn === true && current.$color === 'white') || (turn === false && current.$color === 'black')) {
       
       let validMoves = [];
@@ -99,22 +101,26 @@ function select() {
             $rank: parseInt($this.attr('class').split(' ')[2].split('-')[1]),
           }
   
-      
+          // CHECK IF MOVE IS VALID
           for (let i = 0; i < validMoves.length; i++) {
             if (`${target.$file},${target.$rank}` == validMoves[i]) {
               let tmp = current.$position
               current.$selection.appendTo($(`${target.$position}`));
-              target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
               inCheck('white');
               inCheck('black');
-              turn = !turn;
-              // turn = !turn;
-              if (check === true) {
+              // CHECK IF MOVE RESULTS IN KING CHECK
+              if (check === true && (turn == true && current.$color === 'white')) {
                 console.log('true');
                 console.log(tmp);
                 current.$selection.appendTo($(tmp))
                 console.log('That would put you in check!');
                 check = false;
+              }
+              else {
+                turn = !turn;
+                current.$selection.appendTo($(`${target.$position}`));
+                target.$selection.appendTo(current.$color == 'white' ? '#black':'#white')
+                target.$selection.appendTo(current.$color == 'white' ? '#black' : '#white')
               }
               break;
             }

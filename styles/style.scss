@@ -49,12 +49,16 @@
         transition: background-color 0.3s ease-in-out;
         background-color: blue;
       }
+      .black-square-1 {
+        background-color: #ccc;
+      }
       .enemy {
         transition: background-color 0.3s ease-in-out;
         background-color: red;
       }
-      .black-square-1 {
-        background-color: #ccc;
+      .check {
+        transition: background-color 0.3s ease-in-out;
+        background-color: red;
       }
     }
   }
